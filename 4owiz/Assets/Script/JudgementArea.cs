@@ -74,19 +74,19 @@ public class JudgementArea : MonoBehaviour
                 switch (note._note._check)
                 {
                     case Music.CheckType.Red:
-                        isRightKeyPressed = Input.GetKeyDown(KeyCode.D);
+                        isRightKeyPressed = Input.GetKeyDown(KeyCode.RightArrow);
                         break;
 
                     case Music.CheckType.Blue:
-                        isRightKeyPressed = Input.GetKeyDown(KeyCode.A);
+                        isRightKeyPressed = Input.GetKeyDown(KeyCode.LeftArrow);
                         break;
 
                     case Music.CheckType.Green:
-                        isRightKeyPressed = Input.GetKeyDown(KeyCode.S);
+                        isRightKeyPressed = Input.GetKeyDown(KeyCode.DownArrow);
                         break;
 
                     case Music.CheckType.All:
-                        isRightKeyPressed = Input.GetKeyDown(KeyCode.F);
+                        isRightKeyPressed = Input.GetKeyDown(KeyCode.UpArrow);
                         break;
                 }
                 break;
