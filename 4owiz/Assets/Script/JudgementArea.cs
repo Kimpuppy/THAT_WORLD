@@ -39,7 +39,8 @@ public class JudgementArea : MonoBehaviour
             case "LeftJudge":
                 switch (note._note._check)
                 {
-                    case Music.CheckType.Red:
+					case Music.CheckType.Red:
+						
                         ///JoystickButton0 - X 18
                         ///JoystickButton1 - A 16
                         ///JoystickButton2 - B 17

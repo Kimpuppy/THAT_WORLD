@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class GameStage : MonoBehaviour
 {
@@ -18,8 +19,11 @@ public class GameStage : MonoBehaviour
 	public List<Transform> LeftJudgePos;
 	public List<Transform> RightJudgePos;
 	public List<Transform> DownJudgePos;
-
+    
     public GameObject RotateCircle;
+	public AudioSource _audio;
+
+	int _score;
 
     private int _beat;
 
@@ -55,6 +59,8 @@ public class GameStage : MonoBehaviour
 		seq.Append(RotateCircle.transform.DORotate(new Vector3(0.0f, 0.0f, -720.0f), _sheet._beatSecond * 8.0f));
 		seq.SetLoops(-1);
 		seq.Play();
+
+		StartCoroutine(StageEnd());
     }
 
     private void Update()
@@ -112,12 +118,14 @@ public class GameStage : MonoBehaviour
     {
         Debug.Log("Perfect!");
         Hp += 8.0f;
+		_score += 37;
     }
 
     public void OnNotBad(NoteObject note)
     {
         Debug.Log("NotBad!");
         Hp -= 2.0f;
+		_score += 12;
     }
 
     public void OnMissed(NoteObject note)
@@ -125,4 +133,12 @@ public class GameStage : MonoBehaviour
         Debug.Log("Missed!");
         Hp -= 7.0f;
     }
+
+    IEnumerator StageEnd()
+	{
+		yield return new WaitWhile(()=>!_audio.isPlaying);
+		yield return new WaitForSeconds(2.0f);
+		PlayerPrefs.SetInt("Score", _score);
+		SceneManager.LoadScene("Score");
+	}
 }
