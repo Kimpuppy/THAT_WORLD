@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class JudgementArea : MonoBehaviour
 {
+    public SpriteRenderer[] LineSprite;
+
+    public bool _isNote = false;
+
+    private void Update()
+    {
+        for (int i = 0; i < 3; i++)
+            LineSprite[i].color = Color.Lerp(LineSprite[i].color, (_isNote) ? Color.white : Color.clear, 5.0f * Time.deltaTime);
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (!collision.CompareTag("Note"))
@@ -11,6 +21,8 @@ public class JudgementArea : MonoBehaviour
         /// 1플레이어는 left blue side
         /// 2플레이어는 down green side
         /// 3플레이어는 right red side
+
+        _isNote = true;
 
         var note = collision.GetComponent<NoteObject>();
 
@@ -41,7 +53,7 @@ public class JudgementArea : MonoBehaviour
 
                     case Music.CheckType.Green:
                         isRightKeyPressed = Input.GetKeyDown(KeyCode.Joystick1Button0);
-                        break;                  
+                        break;
                 }
                 break;
 
@@ -90,6 +102,9 @@ public class JudgementArea : MonoBehaviour
             note._gameStage.OnPerfect(note);
         else
             note._gameStage.OnNotBad(note);
+
+        // 끄기
+        note._isCollision = false;
 
         note._isHit = true;
 

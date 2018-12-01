@@ -15,6 +15,8 @@ public class NoteObject : MonoBehaviour
     private bool _isStart = false;
     public bool _isHit;
     public GameStage _gameStage;
+    public bool _isCollision = false;
+    private GameObject _judgementArea;
 
     public void Init()
     {
@@ -47,7 +49,7 @@ public class NoteObject : MonoBehaviour
         Sequence seq = DOTween.Sequence();
         seq.SetEase(Ease.InQuad);
 
-		switch (_note._check)
+        switch (_note._check)
         {
             case Music.CheckType.Blue:
                 _noteColor = new Color(76.0f, 192.0f, 218.0f, 255.0f) / 255.0f;
@@ -69,17 +71,17 @@ public class NoteObject : MonoBehaviour
         {
             case Music.GenPos.Left:
                 transform.position = _gameStage.LeftGenPos[(int)_note._check].transform.position;
-				seq.Append(transform.DOLocalMove(_gameStage.LeftJudgePos[(int)_note._check].transform.position, 2 * _beatSecond + _interpolateTime));
+                seq.Append(transform.DOLocalMove(_gameStage.LeftJudgePos[(int)_note._check].transform.position, 2 * _beatSecond + _interpolateTime));
                 break;
 
             case Music.GenPos.Right:
-				transform.position = _gameStage.RightGenPos[(int)_note._check].transform.position;
-				seq.Append(transform.DOLocalMove(_gameStage.RightJudgePos[(int)_note._check].transform.position, 2 * _beatSecond + _interpolateTime));
+                transform.position = _gameStage.RightGenPos[(int)_note._check].transform.position;
+                seq.Append(transform.DOLocalMove(_gameStage.RightJudgePos[(int)_note._check].transform.position, 2 * _beatSecond + _interpolateTime));
                 break;
 
             case Music.GenPos.Down:
-				transform.position = _gameStage.DownGenPos[(int)_note._check].transform.position;
-				seq.Append(transform.DOLocalMove(_gameStage.DownJudgePos[(int)_note._check].transform.position, 2 * _beatSecond + _interpolateTime));
+                transform.position = _gameStage.DownGenPos[(int)_note._check].transform.position;
+                seq.Append(transform.DOLocalMove(_gameStage.DownJudgePos[(int)_note._check].transform.position, 2 * _beatSecond + _interpolateTime));
                 break;
         }
 
@@ -98,7 +100,16 @@ public class NoteObject : MonoBehaviour
         if (!_isHit)
         {
             _gameStage.OnMissed(this);
+            _isCollision = false;
+            _judgementArea.GetComponent<JudgementArea>()._isNote = false;
             Destroy(gameObject);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        _isCollision = true;
+        if (collision.CompareTag("HitRange"))
+            _judgementArea = collision.gameObject;
     }
 }
