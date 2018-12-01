@@ -15,6 +15,7 @@ public class GameStage : MonoBehaviour
     public GameObject LeftJudgePos;
 	public GameObject RightJudgePos;
 	public GameObject DownJudgePos;
+    public GameObject RotateCircle;
 
     private int _beat;
 
@@ -30,8 +31,8 @@ public class GameStage : MonoBehaviour
         {
             _hp = value;
 
-            if (_hp > 10.0f)
-                _hp = 10.0f;
+            if (_hp > 100.0f)
+                _hp = 100.0f;
             else if (_hp <= 0)
                 UnityEditor.EditorApplication.isPlaying = false;
         }
@@ -40,21 +41,21 @@ public class GameStage : MonoBehaviour
     private void Start()
     {
         //_hp = 10.0f;
-        Hp = 10.0f;
+        Hp = 100.0f;
         _sheet = new Music1();
         _sheet.Init();
         StartCoroutine(StartStage());
 		//InvokeRepeating("BeatAlert", 0, _sheet._beatSecond);
 
 		Sequence seq = DOTween.Sequence();
-		seq.Append(_hpCircle.transform.DORotate(new Vector3(0.0f, 0.0f, -720.0f), _sheet._beatSecond * 8.0f));
+		seq.Append(RotateCircle.transform.DORotate(new Vector3(0.0f, 0.0f, -720.0f), _sheet._beatSecond * 8.0f));
 		seq.SetLoops(-1);
 		seq.Play();
     }
 
     private void Update()
     {
-        var size = 0.881f + (1 - 0.881f) / 10 * _hp;
+		var size = _hp * 1.118664f / 100;
         _hpCircle.transform.localScale = Vector2.Lerp(_hpCircle.transform.localScale, new Vector3(size, size), 5.0f * Time.deltaTime);
     }
 
@@ -106,18 +107,18 @@ public class GameStage : MonoBehaviour
     public void OnPerfect(NoteObject note)
     {
         Debug.Log("Perfect!");
-        Hp += 3.0f;
+        Hp += 8.0f;
     }
 
     public void OnNotBad(NoteObject note)
     {
         Debug.Log("NotBad!");
-        Hp -= 1.0f;
+        Hp -= 2.0f;
     }
 
     public void OnMissed(NoteObject note)
     {
         Debug.Log("Missed!");
-        Hp -= 2.0f;
+        Hp -= 7.0f;
     }
 }
