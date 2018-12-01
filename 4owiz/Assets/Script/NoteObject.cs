@@ -47,20 +47,7 @@ public class NoteObject : MonoBehaviour
         Sequence seq = DOTween.Sequence();
         seq.SetEase(Ease.InQuad);
 
-        switch (_note._check)
-        {
-            case Music.CheckType.Blue:
-                _noteColor = new Color(76.0f, 192.0f, 218.0f, 255.0f) / 255.0f;
-                break;
-
-            case Music.CheckType.Red:
-                _noteColor = new Color(218.0f, 76.0f, 122.0f, 255.0f) / 255.0f;
-                break;
-
-            case Music.CheckType.Green:
-                _noteColor = new Color(218.0f, 211.0f, 76.0f, 255.0f) / 255.0f;
-                break;
-        }
+        _noteColor = Color.white;
         _trailRenderer.startColor = _noteColor - new Color(0.0f, 0.0f, 0.0f, 0.25f);
         _trailRenderer.endColor = _noteColor - new Color(0.0f, 0.0f, 0.0f, 1.0f);
 
