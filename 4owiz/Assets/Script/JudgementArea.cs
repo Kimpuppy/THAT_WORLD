@@ -41,11 +41,7 @@ public class JudgementArea : MonoBehaviour
 
                     case Music.CheckType.Green:
                         isRightKeyPressed = Input.GetKeyDown(KeyCode.Joystick1Button0);
-                        break;
-
-                    case Music.CheckType.All:
-                        isRightKeyPressed = Input.GetKeyDown(KeyCode.Joystick1Button3);
-                        break;
+                        break;                  
                 }
                 break;
 
@@ -63,10 +59,6 @@ public class JudgementArea : MonoBehaviour
                     case Music.CheckType.Green:
                         isRightKeyPressed = Input.GetKeyDown(KeyCode.Joystick2Button0);
                         break;
-
-                    case Music.CheckType.All:
-                        isRightKeyPressed = Input.GetKeyDown(KeyCode.Joystick2Button3);
-                        break;
                 }
                 break;
 
@@ -83,10 +75,6 @@ public class JudgementArea : MonoBehaviour
 
                     case Music.CheckType.Green:
                         isRightKeyPressed = Input.GetKeyDown(KeyCode.S);
-                        break;
-
-                    case Music.CheckType.All:
-                        isRightKeyPressed = Input.GetKeyDown(KeyCode.F);
                         break;
                 }
                 break;

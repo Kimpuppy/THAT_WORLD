@@ -67,18 +67,18 @@ public class NoteObject : MonoBehaviour
         switch (_note._genPos)
         {
             case Music.GenPos.Left:
-                transform.position = _gameStage.LeftGenPos.transform.position;
-                seq.Append(transform.DOLocalMove(_gameStage.LeftJudgePos.transform.position, 2 * _beatSecond + _interpolateTime));
+                transform.position = _gameStage.LeftGenPos[(int)_note._check].transform.position;
+				seq.Append(transform.DOLocalMove(_gameStage.LeftJudgePos[(int)_note._check].transform.position, 2 * _beatSecond + _interpolateTime));
                 break;
 
             case Music.GenPos.Right:
-                transform.position = _gameStage.RightGenPos.transform.position;
-                seq.Append(transform.DOLocalMove(_gameStage.RightJudgePos.transform.position, 2 * _beatSecond + _interpolateTime));
+				transform.position = _gameStage.RightGenPos[(int)_note._check].transform.position;
+				seq.Append(transform.DOLocalMove(_gameStage.RightJudgePos[(int)_note._check].transform.position, 2 * _beatSecond + _interpolateTime));
                 break;
 
             case Music.GenPos.Down:
-                transform.position = _gameStage.DownGenPos.transform.position;
-                seq.Append(transform.DOLocalMove(_gameStage.DownJudgePos.transform.position, 2 * _beatSecond + _interpolateTime));
+				transform.position = _gameStage.DownGenPos[(int)_note._check].transform.position;
+				seq.Append(transform.DOLocalMove(_gameStage.DownJudgePos[(int)_note._check].transform.position, 2 * _beatSecond + _interpolateTime));
                 break;
         }
 

@@ -18,11 +18,10 @@ namespace Music
     }
 
     public enum CheckType
-    {
-        Red,
-        Blue,
+	{
+		Blue,
         Green,
-        All
+        Red
     }
 
     public enum GenPos

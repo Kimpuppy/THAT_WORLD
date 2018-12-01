@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
 
 public class GameStage : MonoBehaviour
@@ -9,12 +10,15 @@ public class GameStage : MonoBehaviour
     // 0hp - scale 0.0881;
     // 10hp - scale 1;
     private Music.BaseMusicSheet _sheet;
-	public GameObject LeftGenPos;
-	public GameObject RightGenPos;
-	public GameObject DownGenPos;
-    public GameObject LeftJudgePos;
-	public GameObject RightJudgePos;
-	public GameObject DownJudgePos;
+
+	public List<Transform> LeftGenPos;
+	public List<Transform> RightGenPos;
+	public List<Transform> DownGenPos;
+
+	public List<Transform> LeftJudgePos;
+	public List<Transform> RightJudgePos;
+	public List<Transform> DownJudgePos;
+
     public GameObject RotateCircle;
 
     private int _beat;
