@@ -182,7 +182,7 @@ Transform:
   m_GameObject: {fileID: 197801747}
   m_LocalRotation: {x: -0, y: -0, z: -0.00000046193594, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1186638, y: 1.1186641, z: 1.1186641}
+  m_LocalScale: {x: 0.98170733, y: 0.98170733, z: 0.98170733}
   m_Children: []
   m_Father: {fileID: 858243093}
   m_RootOrder: 1
@@ -227,14 +227,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f0af1f2e9df54dfca375f1fbb45e5ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hpCircle: {fileID: 197801747}
+  _hpCircle: {fileID: 380264217}
   LeftGenPos: {fileID: 446573149}
   RightGenPos: {fileID: 1641718046}
   DownGenPos: {fileID: 539637241}
   LeftJudgePos: {fileID: 429936737}
   RightJudgePos: {fileID: 1520715357}
   DownJudgePos: {fileID: 1308758846}
-  RotateCircle: {fileID: 0}
 --- !u!1 &311789147
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,11 +379,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-<<<<<<< HEAD
   randomSeed: 0
-=======
-  randomSeed: 3920572
->>>>>>> 8c5ef08... HP gauge update
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4893,11 +4888,7 @@ Transform:
   - {fileID: 720318321}
   - {fileID: 1560655746}
   m_Father: {fileID: 0}
-<<<<<<< HEAD
   m_RootOrder: 6
-=======
-  m_RootOrder: 9
->>>>>>> 8c5ef08... HP gauge update
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &384399644
 GameObject:
@@ -5231,6 +5222,7 @@ GameObject:
   m_Component:
   - component: {fileID: 720318321}
   - component: {fileID: 720318320}
+  - component: {fileID: 720318322}
   m_Layer: 0
   m_Name: HPCircle
   m_TagString: Untagged
@@ -5253,11 +5245,7 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-<<<<<<< HEAD
   - {fileID: 2101184181}
-=======
-  - {fileID: 895664498}
->>>>>>> 8c5ef08... HP gauge update
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5278,7 +5266,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 51f334cfae440e44d99ec3ba5ab7bdbd, type: 3}
-  m_Color: {r: 0.14509805, g: 0.05882353, b: 0.05882353, a: 1}
+  m_Color: {r: 0.30882353, g: 0.07947665, b: 0.07947665, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -5300,6 +5288,23 @@ Transform:
   m_Father: {fileID: 380264218}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &720318322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 720318319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b2038115cff7df438309b03b20a5131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ForceMaterial: {fileID: 0}
+  ActiveChange: 1
+  _Alpha: 1
+  Blur: 7.63
+  ShaderChange: 0
+  ActiveUpdate: 1
 --- !u!1 &747994043
 GameObject:
   m_ObjectHideFlags: 0
@@ -5547,11 +5552,7 @@ Transform:
   - {fileID: 949006127}
   - {fileID: 747994044}
   m_Father: {fileID: 0}
-<<<<<<< HEAD
   m_RootOrder: 5
-=======
-  m_RootOrder: 8
->>>>>>> 8c5ef08... HP gauge update
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &858243094
 MonoBehaviour:
@@ -5566,39 +5567,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnSize: 0.82
   OffSize: 0.82
---- !u!21 &895664498
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: Sprites/Default
-  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _AlphaTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - PixelSnap: 0
-    - _EnableExternalAlpha: 0
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &949006126
 GameObject:
   m_ObjectHideFlags: 0
@@ -6376,7 +6344,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-<<<<<<< HEAD
 --- !u!21 &1803225613
 Material:
   serializedVersion: 6
@@ -6443,5 +6410,3 @@ Material:
     - _StencilWriteMask: 255
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-=======
->>>>>>> 8c5ef08... HP gauge update
