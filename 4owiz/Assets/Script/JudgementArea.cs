@@ -104,6 +104,11 @@ public class JudgementArea : MonoBehaviour
             note._gameStage.OnNotBad(note);
 
         note._isHit = true;
+
+        GameObject hitParticlePrefab = Resources.Load<GameObject>("Prefab/HitParticle");
+        GameObject hitParticleObject = Instantiate(hitParticlePrefab, note.transform.position, note.transform.rotation);
+        Destroy(hitParticleObject, hitParticleObject.GetComponent<ParticleSystem>().main.duration);
+
         Destroy(note.gameObject);
     }
 }
