@@ -10,6 +10,7 @@ public class NoteObject : MonoBehaviour
     public AudioSource _audio;
     public static float _interpolateTime = 0.0f;
     private SpriteRenderer _spriteRenderer;
+    private TrailRenderer _trailRenderer;
     private Color _noteColor;
     private bool _isStart = false;
     public bool _isHit;
@@ -21,14 +22,15 @@ public class NoteObject : MonoBehaviour
         _gameStage = GameObject.Find("GameStage").GetComponent<GameStage>();
         _audio = GameObject.Find("BeatController").GetComponent<AudioSource>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _trailRenderer = GetComponent<TrailRenderer>();
 
-		StartCoroutine(Setup());
+        StartCoroutine(Setup());
     }
 
     private void Start()
     {
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-		_spriteRenderer.color = new Color(0.0f, 0.0f, 0.0f, 0.0f) / 255.0f;
+        _spriteRenderer.color = new Color(0.0f, 0.0f, 0.0f, 0.0f) / 255.0f;
     }
 
     private void Update()
@@ -36,43 +38,47 @@ public class NoteObject : MonoBehaviour
         if (_isStart)
         {
             transform.localScale = Vector3.Lerp(transform.localScale, Vector3.one, 2.5f * Time.deltaTime);
-            _spriteRenderer.color = Color.Lerp(_spriteRenderer.color, _noteColor, 2.5f * Time.deltaTime);
+            _spriteRenderer.color = Color.Lerp(_spriteRenderer.color, _noteColor, 10.0f * Time.deltaTime);
         }
     }
 
     private IEnumerator Setup()
-    {      
+    {
         Sequence seq = DOTween.Sequence();
         seq.SetEase(Ease.InQuad);
 
         switch (_note._check)
-		{
-			case Music.CheckType.Blue:
+        {
+            case Music.CheckType.Blue:
                 _noteColor = new Color(76.0f, 192.0f, 218.0f, 255.0f) / 255.0f;
-				break;
-			case Music.CheckType.Red:
-				_noteColor = new Color(218.0f, 76.0f, 122.0f, 255.0f) / 255.0f;
                 break;
-			case Music.CheckType.Green:
+
+            case Music.CheckType.Red:
+                _noteColor = new Color(218.0f, 76.0f, 122.0f, 255.0f) / 255.0f;
+                break;
+
+            case Music.CheckType.Green:
                 _noteColor = new Color(218.0f, 211.0f, 76.0f, 255.0f) / 255.0f;
                 break;
-		}
+        }
+        _trailRenderer.startColor = _noteColor - new Color(0.0f, 0.0f, 0.0f, 0.25f);
+        _trailRenderer.endColor = _noteColor - new Color(0.0f, 0.0f, 0.0f, 1.0f);
 
-		switch (_note._genPos)
+        switch (_note._genPos)
         {
             case Music.GenPos.Left:
-				transform.position = _gameStage.LeftGenPos.transform.position;
+                transform.position = _gameStage.LeftGenPos.transform.position;
                 seq.Append(transform.DOLocalMove(_gameStage.LeftJudgePos.transform.position, 2 * _beatSecond + _interpolateTime));
                 break;
 
-			case Music.GenPos.Right:
+            case Music.GenPos.Right:
                 transform.position = _gameStage.RightGenPos.transform.position;
-				seq.Append(transform.DOLocalMove(_gameStage.RightJudgePos.transform.position, 2 * _beatSecond + _interpolateTime));
+                seq.Append(transform.DOLocalMove(_gameStage.RightJudgePos.transform.position, 2 * _beatSecond + _interpolateTime));
                 break;
 
-			case Music.GenPos.Down:
+            case Music.GenPos.Down:
                 transform.position = _gameStage.DownGenPos.transform.position;
-				seq.Append(transform.DOLocalMove(_gameStage.DownJudgePos.transform.position, 2 * _beatSecond + _interpolateTime));
+                seq.Append(transform.DOLocalMove(_gameStage.DownJudgePos.transform.position, 2 * _beatSecond + _interpolateTime));
                 break;
         }
 
