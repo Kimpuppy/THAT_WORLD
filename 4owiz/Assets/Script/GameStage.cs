@@ -53,12 +53,12 @@ public class GameStage : MonoBehaviour
         _sheet = new Music1();
         _sheet.Init();
         StartCoroutine(StartStage());
-		//InvokeRepeating("BeatAlert", 0, _sheet._beatSecond);
+		InvokeRepeating("BeatAlert", 0, _sheet._beatSecond);
 
 		Sequence seq = DOTween.Sequence();
 		seq.Append(RotateCircle.transform.DORotate(new Vector3(0.0f, 0.0f, -720.0f), _sheet._beatSecond * 8.0f));
 		seq.SetLoops(-1);
-		seq.Play();
+		//seq.Play();
 
 		StartCoroutine(StageEnd());
     }
@@ -116,28 +116,29 @@ public class GameStage : MonoBehaviour
 
     public void OnPerfect(NoteObject note)
     {
-        Debug.Log("Perfect!");
+        //Debug.Log("Perfect!");
         Hp += 8.0f;
 		_score += 37;
     }
 
     public void OnNotBad(NoteObject note)
     {
-        Debug.Log("NotBad!");
-        Hp -= 2.0f;
+        //Debug.Log("NotBad!");
+        //Hp -= 2.0f;
 		_score += 12;
     }
 
     public void OnMissed(NoteObject note)
     {
-        Debug.Log("Missed!");
-        Hp -= 7.0f;
+        //Debug.Log("Missed!");
+        //Hp -= 7.0f;
     }
 
     IEnumerator StageEnd()
 	{
-		yield return new WaitWhile(()=>!_audio.isPlaying);
-		yield return new WaitForSeconds(2.0f);
+		yield return new WaitForSeconds(_audio.clip.length);
+		Debug.Log("스테이지 엔드 로그~");
+		yield return new WaitForSeconds(1.0f);
 		PlayerPrefs.SetInt("Score", _score);
 		SceneManager.LoadScene("Score");
 	}

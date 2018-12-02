@@ -86,9 +86,11 @@ public class NoteObject : MonoBehaviour
         }
 
         seq.AppendCallback(() => { StartCoroutine(MissCheck()); });
-        _genTime = _note._checkTime - _note._beat * _beatSecond;
+        _genTime = _note._checkTime - 2 * _beatSecond;
         seq.Pause();
 
+		//Debug.LogFormat("genTime {0}", _genTime);
+        
         yield return new WaitWhile(() => { return _audio.time < _genTime; });
         _isStart = true;
         seq.Play();
