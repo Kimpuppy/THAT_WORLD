@@ -33,7 +33,7 @@ public class JudgementArea : MonoBehaviour
         var isPerfect = varTime < 0.15f;
         var isRightKeyPressed = false;
 
-        Debug.Log("Trigger Stay");
+        //Debug.Log("Trigger Stay");
         switch (name)
         {
             case "LeftJudge":
@@ -111,9 +111,7 @@ public class JudgementArea : MonoBehaviour
         //Debug.Log("key");
         if (!isRightKeyPressed)
             return;
-
-        Debug.Log("isperpect");
-
+                  
         if (isPerfect)
             note._gameStage.OnPerfect(note);
         else
