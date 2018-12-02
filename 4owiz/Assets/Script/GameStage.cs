@@ -12,18 +12,18 @@ public class GameStage : MonoBehaviour
     // 10hp - scale 1;
     private Music.BaseMusicSheet _sheet;
 
-	public List<Transform> LeftGenPos;
-	public List<Transform> RightGenPos;
-	public List<Transform> DownGenPos;
+    public List<Transform> LeftGenPos;
+    public List<Transform> RightGenPos;
+    public List<Transform> DownGenPos;
 
-	public List<Transform> LeftJudgePos;
-	public List<Transform> RightJudgePos;
-	public List<Transform> DownJudgePos;
-    
+    public List<Transform> LeftJudgePos;
+    public List<Transform> RightJudgePos;
+    public List<Transform> DownJudgePos;
+
     public GameObject RotateCircle;
-	public AudioSource _audio;
+    public AudioSource _audio;
 
-	int _score;
+    private int _score;
 
     private int _beat;
 
@@ -42,7 +42,7 @@ public class GameStage : MonoBehaviour
             if (_hp > 100.0f)
                 _hp = 100.0f;
             else if (_hp <= 0)
-                UnityEditor.EditorApplication.isPlaying = false;
+                UnityEditor.EditorApplication.isPlaying = true;
         }
     }
 
@@ -53,19 +53,19 @@ public class GameStage : MonoBehaviour
         _sheet = new Music1();
         _sheet.Init();
         StartCoroutine(StartStage());
-		//InvokeRepeating("BeatAlert", 0, _sheet._beatSecond);
+        //InvokeRepeating("BeatAlert", 0, _sheet._beatSecond);
 
-		Sequence seq = DOTween.Sequence();
-		seq.Append(RotateCircle.transform.DORotate(new Vector3(0.0f, 0.0f, -720.0f), _sheet._beatSecond * 8.0f));
-		seq.SetLoops(-1);
-		seq.Play();
+        Sequence seq = DOTween.Sequence();
+        seq.Append(RotateCircle.transform.DORotate(new Vector3(0.0f, 0.0f, -720.0f), _sheet._beatSecond * 8.0f));
+        seq.SetLoops(-1);
+        seq.Play();
 
-		StartCoroutine(StageEnd());
+        StartCoroutine(StageEnd());
     }
 
     private void Update()
     {
-		var size = _hp * 1.118664f / 100;
+        var size = _hp * 1.118664f / 100;
         _hpCircle.transform.localScale = Vector2.Lerp(_hpCircle.transform.localScale, new Vector3(size, size), 5.0f * Time.deltaTime);
     }
 
@@ -118,14 +118,14 @@ public class GameStage : MonoBehaviour
     {
         Debug.Log("Perfect!");
         Hp += 8.0f;
-		_score += 37;
+        _score += 37;
     }
 
     public void OnNotBad(NoteObject note)
     {
         Debug.Log("NotBad!");
         Hp -= 2.0f;
-		_score += 12;
+        _score += 12;
     }
 
     public void OnMissed(NoteObject note)
@@ -134,11 +134,11 @@ public class GameStage : MonoBehaviour
         Hp -= 7.0f;
     }
 
-    IEnumerator StageEnd()
-	{
-		yield return new WaitWhile(()=>!_audio.isPlaying);
-		yield return new WaitForSeconds(2.0f);
-		PlayerPrefs.SetInt("Score", _score);
-		SceneManager.LoadScene("Score");
-	}
+    private IEnumerator StageEnd()
+    {
+        yield return new WaitWhile(() => !_audio.isPlaying);
+        yield return new WaitForSeconds(2.0f);
+        PlayerPrefs.SetInt("Score", _score);
+        SceneManager.LoadScene("Score");
+    }
 }

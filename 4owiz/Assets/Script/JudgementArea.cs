@@ -39,8 +39,8 @@ public class JudgementArea : MonoBehaviour
             case "LeftJudge":
                 switch (note._note._check)
                 {
-					case Music.CheckType.Red:
-						
+                    case Music.CheckType.Red:
+
                         ///JoystickButton0 - X 18
                         ///JoystickButton1 - A 16
                         ///JoystickButton2 - B 17
@@ -90,6 +90,21 @@ public class JudgementArea : MonoBehaviour
                         isRightKeyPressed = Input.GetKeyDown(KeyCode.DownArrow);
                         break;
                 }
+                break;
+        }
+
+        switch (note._note._check)
+        {
+            case Music.CheckType.Red:
+
+                break;
+
+            case Music.CheckType.Blue:
+
+                break;
+
+            case Music.CheckType.Green:
+
                 break;
         }
 
